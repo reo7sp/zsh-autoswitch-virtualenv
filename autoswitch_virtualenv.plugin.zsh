@@ -1,5 +1,7 @@
 export AUTOSWITCH_VERSION="3.7.1"
 export AUTOSWITCH_FILE=".venv"
+export AUTOSWITCH_FILE_ALT_1=".env"
+export AUTOSWITCH_FILE_ALT_2="venv"
 
 AUTOSWITCH_RED="\e[31m"
 AUTOSWITCH_GREEN="\e[32m"
@@ -123,7 +125,10 @@ function _check_path()
 
     if [[ -e "${check_dir}/${AUTOSWITCH_FILE}" ]]; then
         printf "${check_dir}/${AUTOSWITCH_FILE}"
-        return
+    elif [[ -e "${check_dir}/${AUTOSWITCH_FILE_ALT_1}" ]]; then
+        printf "${check_dir}/${AUTOSWITCH_FILE_ALT_1}"
+    elif [[ -e "${check_dir}/${AUTOSWITCH_FILE_ALT_2}" ]]; then
+        printf "${check_dir}/${AUTOSWITCH_FILE_ALT_2}"
     elif [[ -f "${check_dir}/poetry.lock" ]]; then
         printf "${check_dir}/poetry.lock"
     elif [[ -f "${check_dir}/Pipfile" ]]; then
